@@ -1,6 +1,6 @@
 {
   "name": "scsr",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Solidity Contract Size Reporter",
   "main": "index.js",
   "repository": "https://github.com/binodnp/solidity-contract-size-reporter",

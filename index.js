@@ -11,7 +11,7 @@ const { Table } = require("console-table-printer");
 
 const MAX_BYTE_CODE_LIMIT = 24576;
 const NOTICE_THRESHOLD = 0.8;
-const DISPLAY_THRESHOLD = 0.5;
+const DISPLAY_THRESHOLD = 0.15;
 const ERROR_TOO_BIG_TO_DEPLOY = "This contract is too big to be deployed!";
 const ERROR_MAXIMUM_CAPACITY_REACHING = "Maximum capacity almost reached. Please refactor.";
 const MESSAGE_OK = "OK";
@@ -19,7 +19,7 @@ const MESSAGE_OK = "OK";
 const printNumber = x => x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 const getContracts = async directory => readdir(directory);
 
-const reportSummary = async (searchPath, files, detailed) => {
+const reportSummary = async (root, searchPath, files, detailed) => {
   const getABI = async file => {
     const contents = await readFile(file);
     const data = JSON.parse(contents.toString());
@@ -34,7 +34,7 @@ const reportSummary = async (searchPath, files, detailed) => {
       const abi = await getABI(filePath);
       const deployedBytecodeLength = abi.deployedBytecode.length / 2;
       const bytecodeLength = abi.bytecode.length / 2;
-      const sourcePath = abi.sourcePath.replace(searchPath, ".");
+      const sourcePath = abi.sourcePath.replace(root, ".");
 
       result.push({
         sourcePath,
@@ -82,10 +82,10 @@ const reportSummary = async (searchPath, files, detailed) => {
 
 (async () => {
   const args = process.argv;
-  const currentPath = args[2] || process.cwd();
-  const detailed = (args[3] || "").toLowerCase() === "true";
+  const root = args[2] || process.cwd();
+  const detailed = (args[3] || "false").toLowerCase() === "true";
 
-  const buildDirectory = path.join(currentPath, "build", "contracts");
+  const buildDirectory = path.join(root, "build", "contracts");
 
   const exists = await pathExists(buildDirectory);
   if (!exists) {
@@ -94,5 +94,5 @@ const reportSummary = async (searchPath, files, detailed) => {
   }
 
   const files = await getContracts(buildDirectory);
-  reportSummary(buildDirectory, files, detailed);
+  reportSummary(root, buildDirectory, files, detailed);
 })();
