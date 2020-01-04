@@ -1,0 +1,41 @@
+{
+  "name": "scsr",
+  "version": "1.0.0",
+  "description": "Solidity Contract Size Reporter",
+  "main": "index.js",
+  "repository": "https://github.com/binodnp/solidity-contract-size-reporter",
+  "author": "Binod Nirvan <binodnp@outlook.com>",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "start": "node index.js ../simple-shared-wallet true"
+  },
+  "bin": {
+    "scsr": "index.js"
+  },
+  "keywords": [
+    "solidity",
+    "truffle",
+    "compilation",
+    "contract-size",
+    "bytecode",
+    "markdown",
+    "ethereum",
+    "eth",
+    "ethereum classic",
+    "etc",
+    "tron",
+    "tronix",
+    "trx",
+    "qtum",
+    "wanchain",
+    "aeternity",
+    "counterparty",
+    "rootstock",
+    "ubiq",
+    "monax"
+  ],
+  "dependencies": {
+    "console-table-printer": "^1.1.30"
+  }
+}
