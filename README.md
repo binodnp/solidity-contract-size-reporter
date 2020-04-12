@@ -9,7 +9,7 @@ approaching maximum contract size limit.
 ## Getting Started
 
 ```npm
-sudo npm install scsr -g
+npm install scsr -g
 ```
 
 **CLI Arguments**
